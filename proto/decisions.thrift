@@ -2,13 +2,11 @@ namespace java com.rbkmoney.bouncer.decisions
 namespace erlang bdcs
 
 enum ContextFragmentVersion {
-    /// Используется `context_v1.Context` в качестве модели контекста.
-    v1
-}
-
-enum ContextFragmentEncoding {
-    /// Содержимое представлено согласно thrift strict binary encoding.
-    thrift_binary
+    /**
+     * Используется `context_v1.Context` в качестве модели контекста.
+     * Содержимое представлено согласно thrift strict binary encoding.
+     */
+    v1_thrift_binary
 }
 
 /**
@@ -20,8 +18,7 @@ enum ContextFragmentEncoding {
  */
 struct ContextFragment {
     1: required ContextFragmentVersion version
-    2: required ContextFragmentEncoding encoding
-    3: optional binary content
+    2: optional binary content
 }
 
 /**
