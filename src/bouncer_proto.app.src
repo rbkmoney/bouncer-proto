@@ -1,0 +1,11 @@
+{application, bouncer_proto, [
+    {description, "Decision making service protocol definitions"},
+    {vsn, "1.0.0"},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
+    {maintainers, [
+        "Andrey Mayorov <a.mayorov@rbkmoney.com>"
+    ]}
+]}.
