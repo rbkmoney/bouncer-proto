@@ -72,8 +72,9 @@ struct AuthScope {
  */
 struct User {
     1: optional string id
-    2: optional string email
-    3: optional set<Organization> orgs
+    2: optional Entity realm
+    3: optional string email
+    4: optional set<Organization> orgs
 }
 
 struct Organization {
