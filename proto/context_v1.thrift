@@ -153,14 +153,14 @@ struct OrgManagementOperation {
      *  - ...
      */
     1: optional string id
-    2: optional Entity org
+    2: optional Entity organization
     3: optional User member
     4: optional OrgRole role
 }
 
 struct OrgManagementInvitation {
     1: optional Invitee invitee
-    2: optional Entity org
+    2: optional Entity organization
 }
 
 struct Invitee {
