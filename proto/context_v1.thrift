@@ -5,6 +5,9 @@
 namespace java com.rbkmoney.bouncer.context.v1
 namespace erlang bctx_v1
 
+typedef i32 Version
+const Version HEAD = 1
+
 /**
  * Отметка во времени согласно RFC 3339.
  *
@@ -19,13 +22,15 @@ typedef string Timestamp
  */
 struct Context {
 
-    1: optional Environment env
-    2: optional Auth auth
-    3: optional User user
-    4: optional Requester requester
+    1: required Version vsn = HEAD
 
-    5: optional ContextCommonAPI capi
-    6: optional ContextOrgManagement orgmgmt
+    2: optional Environment env
+    3: optional Auth auth
+    4: optional User user
+    5: optional Requester requester
+
+    6: optional ContextCommonAPI capi
+    7: optional ContextOrgManagement orgmgmt
 
 }
 
