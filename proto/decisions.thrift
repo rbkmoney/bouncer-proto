@@ -52,10 +52,16 @@ struct Assertion {
 
 exception RulesetNotFound {}
 
+// TODO
+// Пока без лишних деталей. Надо бы понять, нужны ли они клиенту.
+// Предполагается, что в аудит-лог детали подобной ошибки всё же попадают.
+exception InvalidContext {}
+
 service Arbiter {
 
     Judgement Judge (1: RulesetID ruleset, 2: Context ctx) throws (
         1: RulesetNotFound ex1
+        2: InvalidContext ex2
     )
 
 }
