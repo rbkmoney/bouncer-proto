@@ -1,31 +1,15 @@
 namespace java com.rbkmoney.bouncer.decisions
 namespace erlang bdcs
 
-enum ContextFragmentType {
-    /**
-     * Используется `context_v1.Context` в качестве модели контекста.
-     * Содержимое представлено согласно thrift strict binary encoding.
-     */
-    v1_thrift_binary
-}
+include "context.thrift"
 
-/**
- * Модель непрозрачного для клиентов фрагмента контекста для принятия решений.
- *
- * Непрозрачность здесь введена с целью минимизировать количество сервисов,
- * которые необходимо будет обновлять при изменении модели контекста, например
- * в случае добавления новых атрибутов.
- */
-struct ContextFragment {
-    1: required ContextFragmentType type
-    2: optional binary content
-}
+typedef string ContextFragmentID
 
 /**
  * Контекст для принятия решений
  */
 struct Context {
-    1: required list<ContextFragment> fragments
+    1: required map<ContextFragmentID, context.ContextFragment> fragments
 }
 
 /// Сервис принятия решений вида «можно» / «нельзя»
@@ -41,6 +25,11 @@ enum Resolution {
 /** Принятое решение. */
 struct Judgement {
     1: required Resolution resolution
+    // TODO
+    // Опять же любопытно: нужны ли здесь какие-то детали принятых решений? Или мы всё же
+    // предполагаем, что с деталями клиенту всё равно делать нечего, и соостветсвенно для
+    // исключения возможности утечки их пользователю (потенциальному злоумышленнику) разумнее
+    // их не отдавать, а только лишь писать в аудит-лог?
     2: optional list<Assertion> assertions
 }
 

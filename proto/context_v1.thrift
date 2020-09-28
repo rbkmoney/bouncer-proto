@@ -20,7 +20,7 @@ typedef string Timestamp
  * Контекст для принятия решений, по сути аннотированный набором атрибутов.
  * Контексты можно компоновать между собой.
  */
-struct Context {
+struct ContextFragment {
 
     1: required Version vsn = HEAD
 
