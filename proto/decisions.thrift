@@ -40,6 +40,7 @@ struct Assertion {
 }
 
 exception RulesetNotFound {}
+exception InvalidRuleset {}
 
 // TODO
 // Пока без лишних деталей. Надо бы понять, нужны ли они клиенту.
@@ -50,7 +51,8 @@ service Arbiter {
 
     Judgement Judge (1: RulesetID ruleset, 2: Context ctx) throws (
         1: RulesetNotFound ex1
-        2: InvalidContext ex2
+        2: InvalidRuleset ex2
+        3: InvalidContext ex3
     )
 
 }
