@@ -31,6 +31,7 @@ struct ContextFragment {
 
     6: optional ContextCommonAPI capi
     7: optional ContextOrgManagement orgmgmt
+    8: optional ContextUrlShortener shortener
 
 }
 
@@ -139,7 +140,7 @@ struct Invoice {
 
 struct Payment {
     1: optional string id
-    3: optional i32 num_refunds
+    2: optional i32 num_refunds
 }
 
 /**
@@ -170,6 +171,29 @@ struct OrgManagementInvitation {
 
 struct Invitee {
     1: optional string email
+}
+
+/**
+ * Атрибуты Url Shortener.
+ */
+struct ContextUrlShortener {
+    1: optional UrlShortenerOperation op
+}
+
+struct UrlShortenerOperation {
+    /**
+     * Например:
+     *  - "ShortenUrl"
+     *  - "GetShortenedUrl"
+     *  - "DeleteShortenedUrl"
+     */
+    1: optional string id
+    2: optional ShortenedUrl shortened_url
+}
+
+struct ShortenedUrl {
+    1: optional string id
+    2: optional Entity owner
 }
 
 /**
