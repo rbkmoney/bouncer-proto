@@ -32,7 +32,7 @@ struct ContextFragment {
     6: optional ContextCommonAPI capi
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
-
+    9: optional ContextAnalyticsAPI anapi
 }
 
 /**
@@ -194,6 +194,25 @@ struct UrlShortenerOperation {
 struct ShortenedUrl {
     1: optional string id
     2: optional Entity owner
+}
+
+/**
+ * Атрибуты AnalyticsAPI.
+ */
+struct ContextAnalyticsAPI {
+    1: optional AnalyticsAPIOperation op
+}
+
+struct AnalyticsAPIOperation {
+    /**
+     * Например:
+     *  - "GetPaymentsAmount"
+     *  - "CreateReport"
+     *  - "SearchInvoices"
+     */
+    1: optional string id
+    2: optional Entity party
+    3: optional list<Entity> shops
 }
 
 /**
