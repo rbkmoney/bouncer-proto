@@ -212,7 +212,7 @@ struct AnalyticsAPIOperation {
      */
     1: optional string id
     2: optional Entity party
-    3: optional list<Entity> shops
+    3: optional set<Entity> shops
 }
 
 /**
