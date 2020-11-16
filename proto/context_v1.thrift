@@ -32,7 +32,7 @@ struct ContextFragment {
     6: optional ContextCommonAPI capi
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
-    9: optional ContextBinaopi binapi
+    9: optional ContextBinapi binapi
 }
 
 /**
