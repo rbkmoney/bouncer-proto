@@ -32,7 +32,7 @@ struct ContextFragment {
     6: optional ContextCommonAPI capi
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
-
+    9: optional ContextBinaopi binapi
 }
 
 /**
@@ -194,6 +194,17 @@ struct UrlShortenerOperation {
 struct ShortenedUrl {
     1: optional string id
     2: optional Entity owner
+}
+
+
+struct ContextBinapi {
+    1: required BinapiOperation op
+}
+
+struct BinapiOperation {
+    1: required string id
+    2: optional string card_number
+    3: optional Entity party
 }
 
 /**
