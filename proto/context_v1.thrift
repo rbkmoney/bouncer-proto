@@ -6,6 +6,7 @@ namespace java com.rbkmoney.bouncer.context.v1
 namespace erlang bctx_v1
 
 typedef i32 Version
+typedef map<string, string> Claims
 const Version HEAD = 1
 
 /**
@@ -65,6 +66,7 @@ struct Auth {
     1: optional string method
     2: optional set<AuthScope> scope
     3: optional Timestamp expiration
+    4: optional Claims claims
 }
 
 struct AuthScope {
