@@ -208,8 +208,7 @@ struct BinapiOperation {
      *  - ...
      */
     1: required string id
-    2: optional string card_number
-    3: optional Entity party
+    2: optional Entity party
 }
 
 /**
