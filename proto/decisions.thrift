@@ -24,10 +24,12 @@ enum Resolution {
 
 /**
  * Принятое решение.
+ * Измененный контекст
  * Детали того, какие правила сработали и почему, можно увидеть в аудит-логе.
  */
 struct Judgement {
     1: required Resolution resolution
+    2: optional Context ctx
 }
 
 exception RulesetNotFound {}
