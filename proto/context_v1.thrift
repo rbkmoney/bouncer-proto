@@ -128,7 +128,7 @@ struct ContextInvoicing {
 
 /**
  * Атрибуты Common API.
- * Данные, присланные _клиентом_ в явном виде как часть запросаа
+ * Данные, присланные _клиентом_ в явном виде как часть запроса
  */
 struct ContextCommonAPI {
     1: optional CommonAPIOperation op
