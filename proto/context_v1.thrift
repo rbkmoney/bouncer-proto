@@ -113,8 +113,10 @@ struct Requester {
 }
 
 /**
- * Контекст, получаемый из invoicing и содержащий
- * _проверенную_ информацию
+ * Контекст, получаемый из сервиса, реализующего интерфейс invoicing
+ * https://github.com/rbkmoney/damsel/tree/master/proto/payment_processing.thrift#L996
+ * (например hellgate)
+ * и содержащий _проверенную_ информацию
  */
 struct ContextInvoicing {
     1: optional Entity party
