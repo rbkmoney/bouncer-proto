@@ -2,6 +2,7 @@ namespace java com.rbkmoney.bouncer.decisions
 namespace erlang bdcs
 
 include "context.thrift"
+include "restriction.thrift"
 
 typedef string ContextFragmentID
 
@@ -17,10 +18,17 @@ struct Context {
 /** Идентификатор свода правил. */
 typedef string RulesetID
 
-enum Resolution {
-    allowed
-    forbidden
+union Resolution {
+    ResolutionAllowed allowed,
+    ResulutionRestricted restricted,
+    ResulutionForbidden forbidden
 }
+
+struct ResolutionAllowed {}
+struct ResulutionRestricted {
+    1: required restriction.Restriction restriction
+}
+struct ResulutionForbidden {}
 
 /**
  * Принятое решение.
@@ -29,7 +37,6 @@ enum Resolution {
  */
 struct Judgement {
     1: required Resolution resolution
-    2: optional Context ctx
 }
 
 exception RulesetNotFound {}
