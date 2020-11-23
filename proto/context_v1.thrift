@@ -33,6 +33,7 @@ struct ContextFragment {
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
+   10: optional InvoicingContext invoicing
 }
 
 /**
@@ -109,6 +110,18 @@ struct OrgRoleScope {
  */
 struct Requester {
     1: optional string ip
+}
+
+/**
+ * Контекст, получаемый из invoicing и содержащий
+ * _проверенную_ информацию
+ */
+struct InvoicingContext {
+    1: optional Entity party
+    2: optional Entity shop
+    3: optional Invoice invoice
+    4: optional Payment payment
+    5: optional Entity refund
 }
 
 /**
