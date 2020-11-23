@@ -19,20 +19,19 @@ struct Context {
 typedef string RulesetID
 
 union Resolution {
-    ResolutionAllowed allowed,
-    ResulutionRestricted restricted,
-    ResulutionForbidden forbidden
+    1: ResolutionAllowed allowed
+    2: ResulutionRestricted restricted
+    3: ResulutionForbidden forbidden
 }
 
 struct ResolutionAllowed {}
 struct ResulutionRestricted {
-    1: required restriction.Restriction restriction
+    1: required restriction.Restrictions restriction
 }
 struct ResulutionForbidden {}
 
 /**
  * Принятое решение.
- * Измененный контекст
  * Детали того, какие правила сработали и почему, можно увидеть в аудит-логе.
  */
 struct Judgement {

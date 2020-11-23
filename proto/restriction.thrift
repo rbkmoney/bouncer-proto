@@ -10,7 +10,7 @@ const Version HEAD = 1
  * Так как ограничения предпологаются только на конкретных сервисах с их
  * уникальными данными, то нет нужды запаковывать их в строку
  */
-struct Restriction {
+struct Restrictions {
     1: required Version vsn = HEAD
     2: optional RestrictionsAnalyticsAPI anapi
 }
@@ -23,7 +23,7 @@ struct RestrictionsAnalyticsAPI {
 }
 
 struct AnalyticsAPIOperationRestrictions {
-    1: required set<Entity> shop_scopes
+    1: required set<Entity> shops
 }
 
 /**
