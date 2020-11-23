@@ -33,7 +33,7 @@ struct ContextFragment {
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
-   10: optional InvoicingContext invoicing
+   10: optional ContextInvoicing invoicing
 }
 
 /**
@@ -116,7 +116,7 @@ struct Requester {
  * Контекст, получаемый из invoicing и содержащий
  * _проверенную_ информацию
  */
-struct InvoicingContext {
+struct ContextInvoicing {
     1: optional Entity party
     2: optional Entity shop
     3: optional Invoice invoice
