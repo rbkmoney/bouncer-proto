@@ -34,6 +34,7 @@ struct ContextFragment {
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
    10: optional ContextInvoicing invoicing
+   11: optional ContextAnalyticsAPI anapi
 }
 
 /**
@@ -225,6 +226,25 @@ struct BinapiOperation {
      */
     1: required string id
     2: optional Entity party
+}
+
+/**
+ * Атрибуты AnalyticsAPI.
+ */
+struct ContextAnalyticsAPI {
+    1: optional AnalyticsAPIOperation op
+}
+
+struct AnalyticsAPIOperation {
+    /**
+     * Например:
+     *  - "GetPaymentsAmount"
+     *  - "CreateReport"
+     *  - "SearchInvoices"
+     */
+    1: optional string id
+    2: optional Entity party
+    3: optional set<Entity> shops
 }
 
 /**
