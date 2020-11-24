@@ -33,6 +33,7 @@ struct ContextFragment {
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
+   10: optional ContextInvoicing invoicing
 }
 
 /**
@@ -112,7 +113,22 @@ struct Requester {
 }
 
 /**
+ * Контекст, получаемый из сервиса, реализующего интерфейс invoicing
+ * https://github.com/rbkmoney/damsel/tree/master/proto/payment_processing.thrift#L996
+ * (например hellgate)
+ * и содержащий _проверенную_ информацию
+ */
+struct ContextInvoicing {
+    1: optional Entity party
+    2: optional Entity shop
+    3: optional Invoice invoice
+    4: optional Payment payment
+    5: optional Entity refund
+}
+
+/**
  * Атрибуты Common API.
+ * Данные, присланные _клиентом_ в явном виде как часть запроса
  */
 struct ContextCommonAPI {
     1: optional CommonAPIOperation op
