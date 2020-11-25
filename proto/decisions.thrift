@@ -26,7 +26,7 @@ union Resolution {
 
 struct ResolutionAllowed {}
 struct ResulutionRestricted {
-    1: required restriction.Restrictions restriction
+    1: required restriction.Restrictions restrictions
 }
 struct ResulutionForbidden {}
 
