@@ -25,15 +25,15 @@ enum ResolutionLegacy {
 
 union Resolution{
     1: ResolutionAllowed allowed
-    2: ResulutionRestricted restricted
-    3: ResulutionForbidden forbidden
+    2: ResolutionRestricted restricted
+    3: ResolutionForbidden forbidden
 }
 
 struct ResolutionAllowed {}
-struct ResulutionRestricted {
+struct ResolutionRestricted {
     1: required restriction.Restrictions restrictions
 }
-struct ResulutionForbidden {}
+struct ResolutionForbidden {}
 
 /**
  * Принятое решение.
