@@ -18,12 +18,12 @@ struct Context {
 /** Идентификатор свода правил. */
 typedef string RulesetID
 
-enum Resolution {
+enum ResolutionLegacy {
     allowed
     forbidden
 }
 
-union ResolutionV2 {
+union Resolution{
     1: ResolutionAllowed allowed
     2: ResulutionRestricted restricted
     3: ResulutionForbidden forbidden
@@ -40,8 +40,8 @@ struct ResulutionForbidden {}
  * Детали того, какие правила сработали и почему, можно увидеть в аудит-логе.
  */
 struct Judgement {
-    1: required Resolution resolution_legacy
-    2: optional ResolutionV2 resolution
+    1: required ResolutionLegacy resolution_legacy
+    2: optional Resolution resolution
 }
 
 exception RulesetNotFound {}
