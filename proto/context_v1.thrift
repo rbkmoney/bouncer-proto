@@ -122,10 +122,38 @@ struct Requester {
  * и содержащий _проверенную_ информацию
  */
 struct ContextInternal {
-    1: optional Entity party
+    1: optional Party party
     2: optional Invoice invoice
-    3: optional Entity invoice_template
-    4: optional Entity customer
+    3: optional Payment payment
+    4: optional InvoiceTemplate invoice_template
+    5: optional Customer customer
+}
+
+struct Party {
+    1: required string id
+    2: optional Entity shop
+}
+
+struct Invoice {
+    1: required string id
+    3: required Entity party
+    2: optional i32 num_payments
+}
+
+struct Payment {
+    1: required string id
+    3: required Invoice invoice
+    2: optional i32 num_refunds
+}
+
+struct InvoiceTemplate {
+    1: required string id
+    2: required Entity party
+}
+
+struct Customer {
+    1: required string id
+    2: required Entity party
 }
 
 /**
@@ -146,19 +174,9 @@ struct CommonAPIOperation {
     1: optional string id
     2: optional Entity party
     3: optional Entity shop
-    4: optional Invoice invoice
-    5: optional Payment payment
+    4: optional Entity invoice
+    5: optional Entity payment
     6: optional Entity refund
-}
-
-struct Invoice {
-    1: optional string id
-    2: optional i32 num_payments
-}
-
-struct Payment {
-    1: optional string id
-    2: optional i32 num_refunds
 }
 
 /**
