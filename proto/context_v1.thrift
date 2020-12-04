@@ -33,7 +33,7 @@ struct ContextFragment {
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
-   10: optional ContextInvoicing invoicing
+   10: optional ContextInternal internal
    11: optional ContextAnalyticsAPI anapi
 }
 
@@ -73,6 +73,8 @@ struct AuthScope {
     1: optional Entity party
     2: optional Entity shop
     3: optional Entity invoice
+    4: optional Entity invoice_tpl
+    5: optional Entity customer
 }
 
 /**
@@ -114,17 +116,16 @@ struct Requester {
 }
 
 /**
- * Контекст, получаемый из сервиса, реализующего интерфейс invoicing
+ * Контекст, получаемый из сервисов, реализующих внутренний интерфейс
  * https://github.com/rbkmoney/damsel/tree/master/proto/payment_processing.thrift#L996
- * (например hellgate)
+ * (например invoicing в hellgate)
  * и содержащий _проверенную_ информацию
  */
-struct ContextInvoicing {
+struct ContextInternal {
     1: optional Entity party
-    2: optional Entity shop
-    3: optional Invoice invoice
-    4: optional Payment payment
-    5: optional Entity refund
+    2: optional Invoice invoice
+    3: optional Entity invoice_tpl
+    4: optional Entity customer
 }
 
 /**
