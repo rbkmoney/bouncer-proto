@@ -116,8 +116,8 @@ struct Requester {
 }
 
 /**
- * Контекст, получаемый из сервисов, реализующих внутренний интерфейс
- * https://github.com/rbkmoney/damsel/tree/master/proto/payment_processing.thrift#L996
+ * Контекст, получаемый из сервисов, реализующих один из интерфейсов протокола
+ * https://github.com/rbkmoney/damsel/tree/master/proto/payment_processing.thrift
  * (например invoicing в hellgate)
  * и содержащий _проверенную_ информацию
  */
