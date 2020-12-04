@@ -33,7 +33,7 @@ struct ContextFragment {
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
-   10: optional ContextInternal internal
+   10: optional ContextPaymentProcessing payment_processing
    11: optional ContextAnalyticsAPI anapi
 }
 
@@ -121,7 +121,7 @@ struct Requester {
  * (например invoicing в hellgate)
  * и содержащий _проверенную_ информацию
  */
-struct ContextInternal {
+struct ContextPaymentProcessing {
     1: optional Party party
     2: optional Invoice invoice
     3: optional Payment payment
@@ -130,30 +130,30 @@ struct ContextInternal {
 }
 
 struct Party {
-    1: required string id
+    1: optional string id
     2: optional Entity shop
 }
 
 struct Invoice {
-    1: required string id
-    3: required Entity party
+    1: optional string id
+    3: optional Entity party
     2: optional i32 num_payments
 }
 
 struct Payment {
-    1: required string id
-    3: required Invoice invoice
+    1: optional string id
+    3: optional Invoice invoice
     2: optional i32 num_refunds
 }
 
 struct InvoiceTemplate {
-    1: required string id
-    2: required Entity party
+    1: optional string id
+    2: optional Entity party
 }
 
 struct Customer {
-    1: required string id
-    2: required Entity party
+    1: optional string id
+    2: optional Entity party
 }
 
 /**
