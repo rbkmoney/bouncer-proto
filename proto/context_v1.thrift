@@ -73,7 +73,7 @@ struct AuthScope {
     1: optional Entity party
     2: optional Entity shop
     3: optional Entity invoice
-    4: optional Entity invoice_tpl
+    4: optional Entity invoice_template
     5: optional Entity customer
 }
 
@@ -124,7 +124,7 @@ struct Requester {
 struct ContextInternal {
     1: optional Entity party
     2: optional Invoice invoice
-    3: optional Entity invoice_tpl
+    3: optional Entity invoice_template
     4: optional Entity customer
 }
 
