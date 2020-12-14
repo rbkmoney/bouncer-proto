@@ -122,38 +122,34 @@ struct Requester {
  * и содержащий _проверенную_ информацию
  */
 struct ContextPaymentProcessing {
-    1: optional Party party
-    2: optional Invoice invoice
-    3: optional Payment payment
-    4: optional InvoiceTemplate invoice_template
-    5: optional Customer customer
-}
-
-struct Party {
-    1: optional string id
-    2: optional Entity shop
+    1: optional Invoice invoice
+    2: optional InvoiceTemplate invoice_template
+    3: optional Customer customer
 }
 
 struct Invoice {
     1: optional string id
     3: optional Entity party
-    2: optional i32 num_payments
+    4: optional Entity shop
+    5: optional set<Payment> payments
 }
 
 struct Payment {
     1: optional string id
-    3: optional Invoice invoice
-    2: optional i32 num_refunds
+    3: optional set<Entity> refunds
 }
 
 struct InvoiceTemplate {
     1: optional string id
     2: optional Entity party
+    3: optional Entity shop
 }
 
 struct Customer {
     1: optional string id
     2: optional Entity party
+    3: optional Entity shop
+    4: optional set<Entity> bindings
 }
 
 /**
