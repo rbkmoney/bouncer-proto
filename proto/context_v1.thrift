@@ -174,9 +174,16 @@ struct CommonAPIOperation {
     1: optional string id
     2: optional Entity party
     3: optional Entity shop
+    7: optional Entity contract
     4: optional Entity invoice
     5: optional Entity payment
     6: optional Entity refund
+    8: optional Entity invoice_template
+    9: optional Entity customer
+    10: optional Entity binding
+    11: optional Entity report
+    12: optional Entity file
+    13: optional Entity webhook
 }
 
 /**
