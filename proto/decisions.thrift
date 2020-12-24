@@ -40,8 +40,7 @@ struct ResolutionForbidden {}
  * Детали того, какие правила сработали и почему, можно увидеть в аудит-логе.
  */
 struct Judgement {
-    1: required ResolutionLegacy resolution_legacy
-    2: optional Resolution resolution
+    2: required Resolution resolution
 }
 
 exception RulesetNotFound {}
