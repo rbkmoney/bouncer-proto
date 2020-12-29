@@ -315,7 +315,7 @@ union JSON {
     7: Array arr
 }
 
-enum Null { null }
+enum Null { Null }
 typedef list<JSON> Array
 typedef map<string, JSON> Object
 
