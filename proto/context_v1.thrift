@@ -245,7 +245,7 @@ struct CommonAPIOperation {
     10: optional Entity binding
     11: optional Entity report
     12: optional Entity file
-    13: optional Webhook webhook // TODO looks out of place
+    13: optional Entity webhook
     14: optional Entity claim
 }
 
