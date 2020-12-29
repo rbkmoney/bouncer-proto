@@ -71,6 +71,7 @@ struct Auth {
     1: optional string method
     2: optional set<AuthScope> scope
     3: optional Timestamp expiration
+    4: optional Token token
 }
 
 struct AuthScope {
@@ -79,6 +80,15 @@ struct AuthScope {
     3: optional Entity invoice
     4: optional Entity invoice_template
     5: optional Entity customer
+}
+
+struct Token {
+    /**
+     * Например, [`jti`][1] в случае использования JWT в качестве токенов.
+     *
+     * [1]: https://tools.ietf.org/html/rfc7519#section-4.1.7
+     */
+    1: optional string id
 }
 
 /**
