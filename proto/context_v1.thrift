@@ -101,6 +101,7 @@ struct Organization {
     1: optional string id
     2: optional Entity owner
     3: optional set<OrgRole> roles
+    4: optional Entity party
 }
 
 struct OrgRole {
