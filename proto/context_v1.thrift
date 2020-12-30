@@ -305,19 +305,13 @@ struct Entity {
  * Подходит для передачи «сырых» данных запросов, структурированных согласно
  * сторонней спецификации.
  */
-union JSON {
-    1: Null nl
-    2: bool b
-    3: i32 i        // от -(2^31) до (2^31 - 1)
-    4: double flt
-    5: string str   // UTF-8 only
-    6: Object obj   // Ключи свойств закодированы в UTF-8
-    7: Array arr
+struct JSON {
+    /**
+     * Строка, представляющая собой валидную сериализацию JSON value.
+     * Получатели вольны не пытаться обрабатывать невалидные строки.
+     */
+    1: required string data
 }
-
-enum Null { Null }
-typedef list<JSON> Array
-typedef map<string, JSON> Object
 
 struct Specification {
     /**
