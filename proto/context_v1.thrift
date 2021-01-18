@@ -248,6 +248,7 @@ struct CommonAPIOperation {
     12: optional Entity file
     13: optional Entity webhook
     14: optional Entity claim
+    15: optional Entity payout
 }
 
 /**
