@@ -62,17 +62,21 @@ struct Deployment {
  * Атрибуты средства авторизации.
  */
 struct Auth {
-    /**
-     *  - "ApiKey"
-     *  - "SessionToken"
-     *  - "InvoiceAccessToken"
-     *  - ...
-     */
     1: optional string method
     2: optional set<AuthScope> scope
     3: optional Timestamp expiration
     4: optional Token token
 }
+
+/**
+ * Известные методы авторизации.
+ * Используются в качестве значения свойства `auth.method`.
+ */
+const string AuthMethod_ApiKey = "ApiKey"
+const string AuthMethod_SessionToken = "SessionToken"
+const string AuthMethod_InvoiceAccessToken = "InvoiceAccessToken"
+const string AuthMethod_InvoiceTemplateAccessToken = "InvoiceTemplateAccessToken"
+const string AuthMethod_CustomerAccessToken = "CustomerAccessToken"
 
 struct AuthScope {
     1: optional Entity party
