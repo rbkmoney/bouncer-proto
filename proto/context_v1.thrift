@@ -33,8 +33,12 @@ struct ContextFragment {
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
-   10: optional ContextPaymentProcessing payment_processing
    11: optional ContextAnalyticsAPI anapi
+
+   10: optional ContextPaymentProcessing payment_processing
+   12: optional ContextPayouts payouts
+   13: optional ContextWebhooks webhooks
+   14: optional ContextReports reports
 }
 
 /**
@@ -164,6 +168,58 @@ struct Customer {
 }
 
 /**
+ * Контекст, получаемый из сервисов, реализующих протоколы сервиса [вебхуков]
+ * (https://github.com/rbkmoney/damsel/tree/master/proto/webhooker.thrift)
+ * и содержащий _проверенную_ информацию.
+ */
+struct ContextWebhooks {
+    1: optional Webhook webhook
+}
+
+struct Webhook {
+    1: optional string id
+    2: optional Entity party
+    3: optional WebhookFilter filter
+}
+
+struct WebhookFilter {
+    1: optional string topic
+    2: optional Entity shop
+}
+
+/**
+ * Контекст, получаемый из сервисов, реализующих протоколы сервиса [отчётов]
+ * (https://github.com/rbkmoney/reporter_proto/tree/master/proto/reports.thrift)
+ * и содержащий _проверенную_ информацию.
+ */
+struct ContextReports {
+    1: optional Report report
+}
+
+struct Report {
+    1: optional string id
+    2: optional Entity party
+    3: optional Entity shop
+    4: optional set<Entity> files
+}
+
+/**
+ * Контекст, получаемый из сервисов, реализующих протоколы сервиса [выплат]
+ * (https://github.com/rbkmoney/damsel/tree/master/proto/payout_processing.thrift)
+ * и содержащий _проверенную_ информацию.
+ */
+struct ContextPayouts {
+    1: optional Payout payout
+}
+
+struct Payout {
+    1: optional string id
+    2: optional Entity party
+    3: optional Entity contract
+    4: optional Entity shop
+}
+
+/**
  * Атрибуты Common API.
  * Данные, присланные _клиентом_ в явном виде как часть запроса
  */
@@ -192,13 +248,16 @@ struct CommonAPIOperation {
     11: optional Entity report
     12: optional Entity file
     13: optional Entity webhook
+    14: optional Entity claim
+    15: optional Entity payout
 
     /**
      * Данные согласно спецификации [swag](https://github.com/rbkmoney/swag)
      * версий v1 и v2.
      */
-    15: optional JSON params
-    16: optional Specification spec
+    16: optional JSON params
+    17: optional Specification spec
+
 }
 
 /**
@@ -285,7 +344,9 @@ struct AnalyticsAPIOperation {
      */
     1: optional string id
     2: optional Entity party
-    3: optional set<Entity> shops
+    3: optional Entity shop
+    4: optional Entity report
+    5: optional Entity file
 }
 
 /**
