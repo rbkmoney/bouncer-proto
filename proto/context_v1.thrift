@@ -283,6 +283,7 @@ struct OrgManagementInvitation {
 
 struct Invitee {
     1: optional string email
+    2: optional string invitationId
 }
 
 /**
