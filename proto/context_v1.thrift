@@ -279,11 +279,11 @@ struct OrgManagementOperation {
 struct OrgManagementInvitation {
     1: optional Invitee invitee
     2: optional Entity organization
+    3: optional string invitationId
 }
 
 struct Invitee {
     1: optional string email
-    2: optional string invitationId
 }
 
 /**
