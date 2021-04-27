@@ -236,60 +236,15 @@ struct Payout {
  * и содержащий _проверенную_ информацию
  */
 struct ContextWallet {
-    1: optional Identity identity
-    2: optional Wallet wallet
-    3: optional Withdrawal withdrawal
-    4: optional Deposit deposit
-    5: optional P2PTransfer p2p_transfer
-    6: optional P2PTransferTemplate p2p_transfer_template
-    7: optional W2WTransfer w2w_transfer
-    8: optional Source source
-    9: optional Destination destination
-}
-
-struct Identity {
-    1: optional string id
-    3: optional Entity party
-}
-
-struct Wallet {
-    1: optional string id
-    3: optional Entity party
-}
-
-struct Withdrawal {
-    1: optional string id
-    3: optional Entity party
-}
-
-struct Deposit {
-    1: optional string id
-    3: optional Entity party
-}
-
-struct P2PTransfer {
-    1: optional string id
-    3: optional Entity party
-}
-
-struct P2PTransferTemplate {
-    1: optional string id
-    3: optional Entity party
-}
-
-struct W2WTransfer {
-    1: optional string id
-    3: optional Entity party
-}
-
-struct Source {
-    1: optional string id
-    3: optional Entity party
-}
-
-struct Destination {
-    1: optional string id
-    3: optional Entity party
+    1: optional Entity identity
+    2: optional Entity wallet
+    3: optional Entity withdrawal
+    4: optional Entity deposit
+    5: optional Entity p2p_transfer
+    6: optional Entity p2p_transfer_template
+    7: optional Entity w2w_transfer
+    8: optional Entity source
+    9: optional Entity destination
 }
 
 /**
@@ -298,19 +253,7 @@ struct Destination {
  * и содержащий _проверенную_ информацию.
  */
 struct ContextWalletWebhooks {
-    1: optional WalletWebhook webhook
-}
-
-struct WalletWebhook {
-    1: optional string id
-    2: optional Entity party
-    3: optional WalletWebhookFilter filter
-}
-
-struct WalletWebhookFilter {
-    1: optional string topic
-    2: optional Entity withdrawal
-    3: optional Entity destination
+    1: optional Entity webhook
 }
 
 /**
@@ -320,13 +263,7 @@ struct WalletWebhookFilter {
  * и содержащий _проверенную_ информацию
  */
 struct ContextWalletReports {
-    1: optional WalletReport report
-}
-
-struct WalletReport {
-    1: optional string id
-    2: optional Entity party
-    4: optional set<Entity> files
+    1: optional Entity report
 }
 
 /**
@@ -490,4 +427,12 @@ struct WalletAPIOperation {
  */
 struct Entity {
     1: optional string id
+    2: optional Entity party
+
+    3: optional Entity filter
+    4: optional string topic
+    5: optional Entity withdrawal
+    6: optional Entity destination
+
+    7: optional set<Entity> files
 }
