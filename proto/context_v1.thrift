@@ -33,17 +33,20 @@ struct ContextFragment {
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
-   11: optional ContextAnalyticsAPI anapi
-   18: optional ContextWalletAPI wapi
+    11: optional ContextAnalyticsAPI anapi
+    18: optional ContextWalletAPI wapi
 
-   10: optional ContextPaymentProcessing payment_processing
-   12: optional ContextPayouts payouts
-   13: optional ContextWebhooks webhooks
-   14: optional ContextReports reports
+    10: optional ContextPaymentProcessing payment_processing
+    12: optional ContextPayouts payouts
+    13: optional ContextWebhooks webhooks
+    14: optional ContextReports reports
 
-   15: optional ContextWallet wallet
-   16: optional ContextWalletWebhooks wallet_webhooks
-   17: optional ContextWalletReports wallet_reports
+    /**
+    * Наборы атрибутов для контекста сервиса кошельков, см. описание ниже.
+    */
+    15: optional set<Entity> wallet
+    16: optional set<Entity> wallet_webhooks
+    17: optional set<Entity> wallet_reports
 }
 
 /**
@@ -89,6 +92,8 @@ struct AuthScope {
     3: optional Entity invoice
     4: optional Entity invoice_template
     5: optional Entity customer
+    6: optional Entity p2p_template
+    7: optional Entity p2p_transfer
 }
 
 struct Token {
@@ -131,6 +136,8 @@ struct OrgRole {
 struct OrgRoleScope {
     1: optional Entity shop
     2: optional Entity wallet
+    3: optional Entity destination
+    6: optional Entity identity
 }
 
 /**
@@ -229,42 +236,102 @@ struct Payout {
     4: optional Entity shop
 }
 
-/**
+/** wallet
  * Контекст, получаемый из сервисов, реализующих один из интерфейсов протокола
  * (https://github.com/rbkmoney/fistful-proto)
  * (например wallet в fistful-server)
  * и содержащий _проверенную_ информацию
- */
-struct ContextWallet {
-    1: optional Entity identity
-    2: optional Entity wallet
-    3: optional Entity withdrawal
-    4: optional Entity deposit
-    5: optional Entity p2p_transfer
-    6: optional Entity p2p_transfer_template
-    7: optional Entity w2w_transfer
-    8: optional Entity source
-    9: optional Entity destination
+
+Информация о возможных объектах и полях к ним относящихся:
+
+type = "Identity" {
+    1: id
+    2: party
 }
 
-/**
+type = "Wallet" {
+    1: id
+    2: identity
+    3: wallet_grant_body
+}
+
+type = "Withdrawal" {
+    1: id
+    2: wallet
+}
+
+type = "Deposit" {
+    1: id
+    2: wallet
+}
+
+type = "P2PTransfer" {
+    1: id
+    2: identity
+}
+
+type = "P2PTemplate" {
+    1: id
+    2: identity
+}
+
+type = "W2WTransfer" {
+    1: id
+    2: wallet
+}
+
+type = "Source" {
+    1: id
+    2: identity
+}
+
+type = "Destination" {
+    1: id
+    2: identity
+}
+
+ */
+
+/** wallet_webhooks
  * Контекст, получаемый из сервисов, реализующих протоколы сервиса [вебхуков]
  * (https://github.com/rbkmoney/fistful-proto/blob/master/proto/webhooker.thrift)
  * и содержащий _проверенную_ информацию.
- */
-struct ContextWalletWebhooks {
-    1: optional Entity webhook
+
+Информация о возможных объектах и полях к ним относящихся:
+
+type = "WalletWebhook" {
+    1: id
+    2: identity
+    3: filter
 }
 
-/**
+type = "WalletWebhookFilter" {
+    1: topic
+    2: withdrawal
+    3: destination
+}
+
+ */
+
+/** wallet_reports
  * Контекст, получаемый из сервисов, реализующих протоколы сервиса [отчётов]
  * (https://github.com/rbkmoney/fistful-reporter-proto)
  * (например wallet в fistful-server)
  * и содержащий _проверенную_ информацию
- */
-struct ContextWalletReports {
-    1: optional Entity report
+
+Информация о возможных объектах и полях к ним относящихся:
+
+type = "WalletReport" {
+    1: id
+    2: identity
+    3: files
 }
+
+type = "WalletReportFile" {
+    1: id
+}
+
+ */
 
 /**
  * Атрибуты Common API.
@@ -409,13 +476,16 @@ struct WalletAPIOperation {
     5: optional Entity withdrawal
     6: optional Entity deposit
     7: optional Entity p2p_transfer
-    8: optional Entity p2p_transfer_template
+    8: optional Entity p2p_template
     9: optional Entity w2w_transfer
     10: optional Entity source
     11: optional Entity destination
     12: optional Entity report
     13: optional Entity file
     14: optional Entity webhook
+    15: optional Entity wallet_grant
+    16: optional Entity destination_grant
+    17: optional Entity body
 }
 
 /**
@@ -425,14 +495,27 @@ struct WalletAPIOperation {
  * например, когда в будущем мы захотим расширить набор атрибутов какой-либо
  * сущности, добавив в неё что-то кроме идентификатора.
  */
+
+typedef string EntityID
+
 struct Entity {
-    1: optional string id
-    2: optional Entity party
+    1: optional EntityID id
+    2: optional string type
+    3: optional EntityID party
 
-    3: optional Entity filter
-    4: optional string topic
-    5: optional Entity withdrawal
-    6: optional Entity destination
+    10: optional EntityID identity
+    11: optional EntityID wallet
+    12: optional Cash wallet_grant_body
 
-    7: optional set<Entity> files
+    20: optional EntityID filter
+    21: optional string topic
+    22: optional EntityID withdrawal
+    23: optional EntityID destination
+
+    30: optional set<EntityID> files
+}
+
+struct Cash {
+    1: optional string amount
+    2: optional string currency
 }
