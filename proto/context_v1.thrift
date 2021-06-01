@@ -45,8 +45,6 @@ struct ContextFragment {
     * Наборы атрибутов для контекста сервиса кошельков, см. описание ниже.
     */
     15: optional set<Entity> wallet
-    16: optional set<Entity> wallet_webhooks
-    17: optional set<Entity> wallet_reports
 }
 
 /**
@@ -290,7 +288,7 @@ type = "Destination" {
     2: identity
 }
 
- */
+*/
 
 /** wallet_webhooks
  * Контекст, получаемый из сервисов, реализующих протоколы сервиса [вебхуков]
@@ -311,7 +309,7 @@ type = "WalletWebhookFilter" {
     3: destination
 }
 
- */
+*/
 
 /** wallet_reports
  * Контекст, получаемый из сервисов, реализующих протоколы сервиса [отчётов]
@@ -331,7 +329,7 @@ type = "WalletReportFile" {
     1: id
 }
 
- */
+*/
 
 /**
  * Атрибуты Common API.
@@ -470,22 +468,22 @@ struct WalletAPIOperation {
      *  - "CreateWebhook"
      */
     1: optional string id
-    2: optional Entity party
-    3: optional Entity identity
-    4: optional Entity wallet
-    5: optional Entity withdrawal
-    6: optional Entity deposit
-    7: optional Entity p2p_transfer
-    8: optional Entity p2p_template
-    9: optional Entity w2w_transfer
-    10: optional Entity source
-    11: optional Entity destination
-    12: optional Entity report
-    13: optional Entity file
-    14: optional Entity webhook
-    15: optional Entity wallet_grant
-    16: optional Entity destination_grant
-    17: optional Entity body
+    2: optional EntityID party
+    3: optional EntityID identity
+    4: optional EntityID wallet
+    5: optional EntityID withdrawal
+    6: optional EntityID deposit
+    7: optional EntityID p2p_transfer
+    8: optional EntityID p2p_template
+    9: optional EntityID w2w_transfer
+    10: optional EntityID source
+    11: optional EntityID destination
+    12: optional EntityID report
+    13: optional EntityID file
+    14: optional EntityID webhook
+    15: optional EntityID wallet_grant
+    16: optional EntityID destination_grant
+    17: optional Cash wallet_grant_body
 }
 
 /**
@@ -501,21 +499,35 @@ typedef string EntityID
 struct Entity {
     1: optional EntityID id
     2: optional string type
-    3: optional EntityID party
 
-    10: optional EntityID identity
-    11: optional EntityID wallet
-    12: optional Cash wallet_grant_body
-
-    20: optional EntityID filter
-    21: optional string topic
-    22: optional EntityID withdrawal
-    23: optional EntityID destination
-
-    30: optional set<EntityID> files
+    3: optional WalletEntity wallet_entity
 }
 
 struct Cash {
     1: optional string amount
     2: optional string currency
+}
+
+struct WalletEntity {
+    1: optional EntityID identity
+    2: optional EntityID wallet
+    3: optional EntityID party
+    4: optional Cash wallet_grant_body
+    5: optional WalletWebhookEntity wallet_webhook_entity
+    6: optional WalletReportEntity wallet_report_entity
+}
+
+struct WalletWebhookEntity {
+    1: optional EntityID filter
+    2: optional string topic
+    3: optional EntityID withdrawal
+    4: optional EntityID destination
+}
+
+struct WalletReportEntity {
+    /**
+    * TODO: Кажется не очень правильно ссылаться на список объектов,
+    * достаточно, чтобы каждый из этих объектов ссылался на объект, которому он принадлежит
+    */
+    1: optional set<EntityID> files
 }
