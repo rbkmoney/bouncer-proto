@@ -500,7 +500,7 @@ struct Entity {
     1: optional EntityID id
     2: optional string type
 
-    3: optional WalletEntity wallet
+    3: optional WalletAttrs wallet
 }
 
 struct Cash {
@@ -508,23 +508,22 @@ struct Cash {
     2: optional string currency
 }
 
-struct WalletEntity {
+struct WalletAttrs {
     1: optional EntityID identity
     2: optional EntityID wallet
     3: optional EntityID party
     4: optional Cash wallet_grant_body
-    5: optional WalletWebhookEntity webhook
-    6: optional WalletReportEntity report
+    5: optional WalletWebhookAttrs webhook
+    6: optional WalletReportAttrs report
 }
 
-struct WalletWebhookEntity {
+struct WalletWebhookAttrs {
     1: optional EntityID filter
-    2: optional string topic
-    3: optional EntityID withdrawal
-    4: optional EntityID destination
+    2: optional EntityID withdrawal
+    3: optional EntityID destination
 }
 
-struct WalletReportEntity {
+struct WalletReportAttrs {
     /**
     * TODO: Кажется не очень правильно ссылаться на список объектов,
     * достаточно, чтобы каждый из этих объектов ссылался на объект, которому он принадлежит
