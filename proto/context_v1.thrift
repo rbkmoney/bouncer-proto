@@ -518,9 +518,8 @@ struct WalletAttrs {
 }
 
 struct WalletWebhookAttrs {
-    1: optional EntityID filter
-    2: optional EntityID withdrawal
-    3: optional EntityID destination
+    1: optional EntityID withdrawal
+    2: optional EntityID destination
 }
 
 struct WalletReportAttrs {
