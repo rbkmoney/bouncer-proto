@@ -135,7 +135,7 @@ struct OrgRoleScope {
     1: optional Entity shop
     2: optional Entity wallet
     3: optional Entity destination
-    6: optional Entity identity
+    4: optional Entity identity
 }
 
 /**
@@ -500,7 +500,7 @@ struct Entity {
     1: optional EntityID id
     2: optional string type
 
-    3: optional WalletEntity wallet_entity
+    3: optional WalletEntity wallet
 }
 
 struct Cash {
@@ -513,8 +513,8 @@ struct WalletEntity {
     2: optional EntityID wallet
     3: optional EntityID party
     4: optional Cash wallet_grant_body
-    5: optional WalletWebhookEntity wallet_webhook_entity
-    6: optional WalletReportEntity wallet_report_entity
+    5: optional WalletWebhookEntity webhook
+    6: optional WalletReportEntity report
 }
 
 struct WalletWebhookEntity {
