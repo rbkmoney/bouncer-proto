@@ -45,6 +45,7 @@ struct ContextFragment {
     * Наборы атрибутов для контекста сервиса кошельков, см. описание ниже.
     */
     15: optional set<Entity> wallet
+    16: optional WalletGrantContext wallet_grant
 }
 
 /**
@@ -332,6 +333,17 @@ type = "WalletReportFile" {
 */
 
 /**
+ * Контекст, получаемый из grant токена, предоставляющего доступ к кошельку или назначению
+ * и содержащий _проверенную_ информацию.
+ */
+
+struct WalletGrantContext {
+    1: optional EntityID wallet
+    2: optional EntityID destination
+    3: optional Cash body
+}
+
+/**
  * Атрибуты Common API.
  * Данные, присланные _клиентом_ в явном виде как часть запроса
  */
@@ -483,7 +495,6 @@ struct WalletAPIOperation {
     14: optional EntityID webhook
     15: optional EntityID wallet_grant
     16: optional EntityID destination_grant
-    17: optional Cash wallet_grant_body
 }
 
 /**
@@ -512,7 +523,7 @@ struct WalletAttrs {
     1: optional EntityID identity
     2: optional EntityID wallet
     3: optional EntityID party
-    4: optional Cash wallet_grant_body
+    4: optional Cash body
     5: optional WalletWebhookAttrs webhook
     6: optional WalletReportAttrs report
 }
