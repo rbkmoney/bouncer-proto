@@ -45,7 +45,6 @@ struct ContextFragment {
     * Наборы атрибутов для контекста сервиса кошельков, см. описание ниже.
     */
     15: optional set<Entity> wallet
-    16: optional WalletGrantContext wallet_grant
 }
 
 /**
@@ -84,6 +83,8 @@ const string AuthMethod_SessionToken = "SessionToken"
 const string AuthMethod_InvoiceAccessToken = "InvoiceAccessToken"
 const string AuthMethod_InvoiceTemplateAccessToken = "InvoiceTemplateAccessToken"
 const string AuthMethod_CustomerAccessToken = "CustomerAccessToken"
+const string AuthMethod_P2PTransferTemplateTicket = "P2PTransferTemplateTicket"
+const string AuthMethod_P2PTransferTemplateAccessToken = "P2PTransferTemplateAccessToken"
 
 struct AuthScope {
     1: optional Entity party
@@ -333,17 +334,6 @@ type = "WalletReportFile" {
 */
 
 /**
- * Контекст, получаемый из grant токена, предоставляющего доступ к кошельку или назначению
- * и содержащий _проверенную_ информацию.
- */
-
-struct WalletGrantContext {
-    1: optional EntityID wallet
-    2: optional EntityID destination
-    3: optional Cash body
-}
-
-/**
  * Атрибуты Common API.
  * Данные, присланные _клиентом_ в явном виде как часть запроса
  */
@@ -470,6 +460,20 @@ struct AnalyticsAPIOperation {
  */
 struct ContextWalletAPI {
     1: optional WalletAPIOperation op
+    2: optional set<WalletGrant> grants
+}
+
+/**
+ * Контекст, получаемый из grant токена, предоставляющего доступ к кошельку или назначению
+ * и содержащий _проверенную_ информацию.
+ */
+
+struct WalletGrant {
+    1: optional EntityID wallet
+    2: optional EntityID destination
+    3: optional Cash body
+    4: optional Timestamp created_at
+    5: optional Timestamp expires_on
 }
 
 struct WalletAPIOperation {
@@ -493,8 +497,6 @@ struct WalletAPIOperation {
     12: optional EntityID report
     13: optional EntityID file
     14: optional EntityID webhook
-    15: optional EntityID wallet_grant
-    16: optional EntityID destination_grant
 }
 
 /**
