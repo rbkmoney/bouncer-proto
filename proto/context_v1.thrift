@@ -33,12 +33,18 @@ struct ContextFragment {
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
-   11: optional ContextAnalyticsAPI anapi
+    11: optional ContextAnalyticsAPI anapi
+    18: optional ContextWalletAPI wapi
 
-   10: optional ContextPaymentProcessing payment_processing
-   12: optional ContextPayouts payouts
-   13: optional ContextWebhooks webhooks
-   14: optional ContextReports reports
+    10: optional ContextPaymentProcessing payment_processing
+    12: optional ContextPayouts payouts
+    13: optional ContextWebhooks webhooks
+    14: optional ContextReports reports
+
+    /**
+    * Наборы атрибутов для контекста сервиса кошельков, см. описание ниже.
+    */
+    15: optional set<Entity> wallet
 }
 
 /**
@@ -77,6 +83,8 @@ const string AuthMethod_SessionToken = "SessionToken"
 const string AuthMethod_InvoiceAccessToken = "InvoiceAccessToken"
 const string AuthMethod_InvoiceTemplateAccessToken = "InvoiceTemplateAccessToken"
 const string AuthMethod_CustomerAccessToken = "CustomerAccessToken"
+const string AuthMethod_P2PTransferTemplateTicket = "P2PTransferTemplateTicket"
+const string AuthMethod_P2PTransferTemplateAccessToken = "P2PTransferTemplateAccessToken"
 
 struct AuthScope {
     1: optional Entity party
@@ -84,6 +92,8 @@ struct AuthScope {
     3: optional Entity invoice
     4: optional Entity invoice_template
     5: optional Entity customer
+    6: optional Entity p2p_template
+    7: optional Entity p2p_transfer
 }
 
 struct Token {
@@ -125,6 +135,9 @@ struct OrgRole {
 
 struct OrgRoleScope {
     1: optional Entity shop
+    2: optional Entity wallet
+    3: optional Entity destination
+    4: optional Entity identity
 }
 
 /**
@@ -222,6 +235,103 @@ struct Payout {
     3: optional Entity contract
     4: optional Entity shop
 }
+
+/** wallet
+ * Контекст, получаемый из сервисов, реализующих один из интерфейсов протокола
+ * (https://github.com/rbkmoney/fistful-proto)
+ * (например wallet в fistful-server)
+ * и содержащий _проверенную_ информацию
+
+Информация о возможных объектах и полях к ним относящихся:
+
+type = "Identity" {
+    1: id
+    2: party
+}
+
+type = "Wallet" {
+    1: id
+    2: identity
+    3: wallet_grant_body
+}
+
+type = "Withdrawal" {
+    1: id
+    2: wallet
+}
+
+type = "Deposit" {
+    1: id
+    2: wallet
+}
+
+type = "P2PTransfer" {
+    1: id
+    2: identity
+}
+
+type = "P2PTemplate" {
+    1: id
+    2: identity
+}
+
+type = "W2WTransfer" {
+    1: id
+    2: wallet
+}
+
+type = "Source" {
+    1: id
+    2: identity
+}
+
+type = "Destination" {
+    1: id
+    2: identity
+}
+
+*/
+
+/** wallet_webhooks
+ * Контекст, получаемый из сервисов, реализующих протоколы сервиса [вебхуков]
+ * (https://github.com/rbkmoney/fistful-proto/blob/master/proto/webhooker.thrift)
+ * и содержащий _проверенную_ информацию.
+
+Информация о возможных объектах и полях к ним относящихся:
+
+type = "WalletWebhook" {
+    1: id
+    2: identity
+    3: filter
+}
+
+type = "WalletWebhookFilter" {
+    1: topic
+    2: withdrawal
+    3: destination
+}
+
+*/
+
+/** wallet_reports
+ * Контекст, получаемый из сервисов, реализующих протоколы сервиса [отчётов]
+ * (https://github.com/rbkmoney/fistful-reporter-proto)
+ * (например wallet в fistful-server)
+ * и содержащий _проверенную_ информацию
+
+Информация о возможных объектах и полях к ним относящихся:
+
+type = "WalletReport" {
+    1: id
+    2: identity
+    3: files
+}
+
+type = "WalletReportFile" {
+    1: id
+}
+
+*/
 
 /**
  * Атрибуты Common API.
@@ -346,12 +456,89 @@ struct AnalyticsAPIOperation {
 }
 
 /**
+ * Атрибуты WalletAPI.
+ */
+struct ContextWalletAPI {
+    1: optional WalletAPIOperation op
+    2: optional set<WalletGrant> grants
+}
+
+/**
+ * Контекст, получаемый из grant токена, предоставляющего доступ к кошельку или назначению
+ * и содержащий _проверенную_ информацию.
+ */
+
+struct WalletGrant {
+    1: optional EntityID wallet
+    2: optional EntityID destination
+    3: optional Cash body
+    4: optional Timestamp created_at
+    5: optional Timestamp expires_on
+}
+
+struct WalletAPIOperation {
+    /**
+     * Например:
+     *  - "ListDestinations"
+     *  - "GetIdentity"
+     *  - "CreateWebhook"
+     */
+    1: optional string id
+    2: optional EntityID party
+    3: optional EntityID identity
+    4: optional EntityID wallet
+    5: optional EntityID withdrawal
+    6: optional EntityID deposit
+    7: optional EntityID p2p_transfer
+    8: optional EntityID p2p_template
+    9: optional EntityID w2w_transfer
+    10: optional EntityID source
+    11: optional EntityID destination
+    12: optional EntityID report
+    13: optional EntityID file
+    14: optional EntityID webhook
+}
+
+/**
  * Нечто уникально идентифицируемое.
  *
  * Рекомендуется использовать для обеспечения прямой совместимости, в случае
  * например, когда в будущем мы захотим расширить набор атрибутов какой-либо
  * сущности, добавив в неё что-то кроме идентификатора.
  */
+
+typedef string EntityID
+
 struct Entity {
-    1: optional string id
+    1: optional EntityID id
+    2: optional string type
+
+    3: optional WalletAttrs wallet
+}
+
+struct Cash {
+    1: optional string amount
+    2: optional string currency
+}
+
+struct WalletAttrs {
+    1: optional EntityID identity
+    2: optional EntityID wallet
+    3: optional EntityID party
+    4: optional Cash body
+    5: optional WalletWebhookAttrs webhook
+    6: optional WalletReportAttrs report
+}
+
+struct WalletWebhookAttrs {
+    1: optional EntityID withdrawal
+    2: optional EntityID destination
+}
+
+struct WalletReportAttrs {
+    /**
+    * TODO: Кажется не очень правильно ссылаться на список объектов,
+    * достаточно, чтобы каждый из этих объектов ссылался на объект, которому он принадлежит
+    */
+    1: optional set<EntityID> files
 }
