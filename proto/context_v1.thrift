@@ -39,6 +39,7 @@ struct ContextFragment {
    12: optional ContextPayouts payouts
    13: optional ContextWebhooks webhooks
    14: optional ContextReports reports
+   15: optional ContextClaimManagement claimmgmt
 }
 
 /**
@@ -284,6 +285,24 @@ struct OrgManagementInvitation {
 
 struct Invitee {
     1: optional string email
+}
+
+/**
+ * Атрибуты Claim Management API.
+ */
+struct ContextClaimManagement {
+    1: optional ClaimManagementOperation op
+}
+
+struct ClaimManagementOperation {
+    /**
+     * Например:
+     *  - "createClaim"
+     *  - "revokeClaimByID"
+     *  - ...
+     */
+    1: optional string id
+    2: optional Entity party
 }
 
 /**
