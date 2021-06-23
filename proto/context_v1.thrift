@@ -92,8 +92,6 @@ struct AuthScope {
     3: optional Entity invoice
     4: optional Entity invoice_template
     5: optional Entity customer
-    6: optional Entity p2p_template
-    7: optional Entity p2p_transfer
 }
 
 struct Token {
@@ -263,16 +261,6 @@ type = "Withdrawal" {
 type = "Deposit" {
     1: id
     2: wallet
-}
-
-type = "P2PTransfer" {
-    1: id
-    2: identity
-}
-
-type = "P2PTemplate" {
-    1: id
-    2: identity
 }
 
 type = "W2WTransfer" {
@@ -489,14 +477,12 @@ struct WalletAPIOperation {
     4: optional EntityID wallet
     5: optional EntityID withdrawal
     6: optional EntityID deposit
-    7: optional EntityID p2p_transfer
-    8: optional EntityID p2p_template
-    9: optional EntityID w2w_transfer
-    10: optional EntityID source
-    11: optional EntityID destination
-    12: optional EntityID report
-    13: optional EntityID file
-    14: optional EntityID webhook
+    7: optional EntityID w2w_transfer
+    8: optional EntityID source
+    9: optional EntityID destination
+    10: optional EntityID report
+    11: optional EntityID file
+    12: optional EntityID webhook
 }
 
 /**
