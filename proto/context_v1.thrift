@@ -133,6 +133,7 @@ struct OrgRoleScope {
  */
 struct Requester {
     1: optional string ip
+    2: optional bool ip_replaced
 }
 
 /**
