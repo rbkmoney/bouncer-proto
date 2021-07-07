@@ -13,6 +13,7 @@ const Version HEAD = 1
 struct Restrictions {
     1: required Version vsn = HEAD
     2: optional RestrictionsAnalyticsAPI anapi
+    3: optional RestrictionsCommonAPI capi
 }
 
 /**
@@ -24,6 +25,13 @@ struct RestrictionsAnalyticsAPI {
 
 struct AnalyticsAPIOperationRestrictions {
     1: required set<Entity> shops
+}
+
+/**
+ * Ограничения, накладываемые на сервисы общего АПИ
+ */
+struct RestrictionsCommonAPI {
+    1: optional bool ip_replacement_forbidden
 }
 
 /**
