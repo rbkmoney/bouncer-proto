@@ -30,6 +30,7 @@ struct ContextFragment {
     5: optional Requester requester
 
     6: optional ContextCommonAPI capi
+   16: optional ContextCommonAPIPCIDSS capi_pcidss
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
@@ -133,7 +134,6 @@ struct OrgRoleScope {
  */
 struct Requester {
     1: optional string ip
-    2: optional string replacement_ip
 }
 
 /**
@@ -255,6 +255,15 @@ struct CommonAPIOperation {
     13: optional Entity webhook
     14: optional Entity claim
     15: optional Entity payout
+}
+
+
+struct ContextCommonAPIPCIDSS {
+    1: optional ContextCommonAPIPCIDSS op
+}
+
+struct ContextCommonAPIPCIDSSOperation {
+    1: optional string replacement_ip
 }
 
 /**
