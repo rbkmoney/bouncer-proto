@@ -30,7 +30,6 @@ struct ContextFragment {
     5: optional Requester requester
 
     6: optional ContextCommonAPI capi
-   16: optional ContextCommonAPIPCIDSS capi_pcidss
     7: optional ContextOrgManagement orgmgmt
     8: optional ContextUrlShortener shortener
     9: optional ContextBinapi binapi
@@ -41,6 +40,8 @@ struct ContextFragment {
    13: optional ContextWebhooks webhooks
    14: optional ContextReports reports
    15: optional ContextClaimManagement claimmgmt
+   16: optional ContextTokens tokens
+
 }
 
 /**
@@ -258,11 +259,7 @@ struct CommonAPIOperation {
 }
 
 
-struct ContextCommonAPIPCIDSS {
-    1: optional ContextCommonAPIPCIDSS op
-}
-
-struct ContextCommonAPIPCIDSSOperation {
+struct ContextTokens {
     1: optional string replacement_ip
 }
 
