@@ -294,9 +294,7 @@ type = "WalletWebhook" {
 }
 
 type = "WalletWebhookFilter" {
-    1: topic
-    2: withdrawal
-    3: destination
+    1: wallet
 }
 
 */
@@ -512,13 +510,7 @@ struct WalletAttrs {
     2: optional EntityID wallet
     3: optional EntityID party
     4: optional Cash body
-    5: optional WalletWebhookAttrs webhook
     6: optional WalletReportAttrs report
-}
-
-struct WalletWebhookAttrs {
-    1: optional EntityID withdrawal
-    2: optional EntityID destination
 }
 
 struct WalletReportAttrs {
