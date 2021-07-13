@@ -242,6 +242,7 @@ struct CommonAPIOperation {
      *  - ...
      */
     1: optional string id
+
     2: optional Entity party
     3: optional Entity shop
     7: optional Entity contract
@@ -256,6 +257,14 @@ struct CommonAPIOperation {
     13: optional Entity webhook
     14: optional Entity claim
     15: optional Entity payout
+
+    /**
+     * Данные согласно спецификации [swag](https://github.com/rbkmoney/swag)
+     * версий v1 и v2.
+     */
+    16: optional JSON params
+    17: optional Specification spec
+
 }
 
 
@@ -380,4 +389,29 @@ struct AnalyticsAPIOperation {
  */
 struct Entity {
     1: optional string id
+}
+
+/**
+ * Значение в JSON, согласно [RFC7159](https://tools.ietf.org/html/rfc7159).
+ *
+ * Подходит для передачи «сырых» данных запросов, структурированных согласно
+ * сторонней спецификации.
+ */
+struct JSON {
+    /**
+     * Строка, представляющая собой валидную сериализацию JSON value.
+     * Получатели вольны не пытаться обрабатывать невалидные строки.
+     */
+    1: required string data
+}
+
+struct Specification {
+    /**
+     * Например:
+     *  - "swag"
+     *  - "swag-analytics"
+     *  - "swag-org-management"
+     */
+    1: optional string name
+    2: optional string version
 }
