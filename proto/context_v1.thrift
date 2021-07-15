@@ -290,11 +290,7 @@ type = "Destination" {
 type = "WalletWebhook" {
     1: id
     2: identity
-    3: filter
-}
-
-type = "WalletWebhookFilter" {
-    1: wallet
+    3: wallet
 }
 
 */
@@ -311,10 +307,6 @@ type = "WalletReport" {
     1: id
     2: identity
     3: files
-}
-
-type = "WalletReportFile" {
-    1: id
 }
 
 */
@@ -496,8 +488,9 @@ typedef string EntityID
 struct Entity {
     1: optional EntityID id
     2: optional string type
+    3: optional EntityID party
 
-    3: optional WalletAttrs wallet
+    4: optional WalletAttrs wallet
 }
 
 struct Cash {
@@ -508,9 +501,8 @@ struct Cash {
 struct WalletAttrs {
     1: optional EntityID identity
     2: optional EntityID wallet
-    3: optional EntityID party
-    4: optional Cash body
-    6: optional WalletReportAttrs report
+    3: optional Cash body
+    4: optional WalletReportAttrs report
 }
 
 struct WalletReportAttrs {
