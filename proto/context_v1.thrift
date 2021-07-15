@@ -133,9 +133,6 @@ struct OrgRole {
 
 struct OrgRoleScope {
     1: optional Entity shop
-    2: optional Entity wallet
-    3: optional Entity destination
-    4: optional Entity identity
 }
 
 /**
