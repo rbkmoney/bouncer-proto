@@ -41,7 +41,6 @@ struct ContextFragment {
    14: optional ContextReports reports
    15: optional ContextClaimManagement claimmgmt
    16: optional ContextTokens tokens
-
 }
 
 /**
@@ -258,10 +257,22 @@ struct CommonAPIOperation {
     15: optional Entity payout
 }
 
-
+/**
+ * Котекст может содержать информацию для контроля привязки платежных средств.
+ * Данные для заполнения получаем из токена платежного средства, куда они
+ * попадают при его создании в CreatePaymentResource.
+ * Также в методе CreatePaymentResource этот фрагмент используется для валидации
+ * провайдерских токенов. Для этого в AuthScope добавлен scope для Shop.
+ */
 struct ContextTokens {
     1: optional string replacement_ip
+    2: optional EntityID party
+    3: optional EntityID shop
+    4: optional EntityID invoice
+    5: optional EntityID invoice_template
+    6: optional EntityID customer
 }
+
 
 /**
  * Атрибуты Organization Management.
@@ -379,5 +390,7 @@ struct AnalyticsAPIOperation {
  * сущности, добавив в неё что-то кроме идентификатора.
  */
 struct Entity {
-    1: optional string id
+    1: optional EntityID id
 }
+
+typedef string EntityID
