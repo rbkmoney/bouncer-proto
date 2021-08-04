@@ -40,7 +40,8 @@ struct ContextFragment {
    13: optional ContextWebhooks webhooks
    14: optional ContextReports reports
    15: optional ContextClaimManagement claimmgmt
-   16: optional ContextTokens tokens
+   16: optional ContextClientInfo client_info
+   17: optional ContextPaymentTool payment_tool
 }
 
 /**
@@ -258,23 +259,6 @@ struct CommonAPIOperation {
 }
 
 /**
- * Котекст может содержать информацию для контроля привязки платежных средств.
- * Данные для заполнения получаем из токена платежного средства, куда они
- * попадают при его создании в CreatePaymentResource.
- * Также в методе CreatePaymentResource этот фрагмент используется для валидации
- * провайдерских токенов. Для этого в AuthScope добавлен scope для Shop.
- */
-struct ContextTokens {
-    1: optional string replacement_ip
-    2: optional EntityID party
-    3: optional EntityID shop
-    4: optional EntityID invoice
-    5: optional EntityID invoice_template
-    6: optional EntityID customer
-}
-
-
-/**
  * Атрибуты Organization Management.
  */
 struct ContextOrgManagement {
@@ -381,6 +365,33 @@ struct AnalyticsAPIOperation {
     4: optional Entity report
     5: optional Entity file
 }
+
+/*
+ * Конекст дополнительной информации о клиенте и его устройствах
+ * передаваемой в некоторых запросах.
+ */
+struct ContextClientInfo {
+    /*
+     * ip адрес плательщика передаваемый в createPaymentResource
+     */
+    1: optional string replacement_ip
+}
+
+/**
+ * Контекст получаемый из токенов платежных инструментов.
+ * Данные упакованны в токен при его создании  в createPaymentResource.
+ * Этот контекст используется и для провайдерских токенов.
+ * Данные для провайдерского токена упакованы в merchantID.
+ */
+struct ContextPaymentTool {
+    1: optional Timestamp expiration
+    2: optional EntityID party
+    3: optional EntityID shop
+    4: optional EntityID invoice
+    5: optional EntityID invoice_template
+    6: optional EntityID customer
+}
+
 
 /**
  * Нечто уникально идентифицируемое.
