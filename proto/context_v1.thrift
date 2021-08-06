@@ -6,14 +6,13 @@ namespace java com.rbkmoney.bouncer.context.v1
 namespace erlang bctx_v1
 
 include "base.thrift"
-include "context.thrift"
 
 typedef base.Version Version
 typedef base.Timestamp Timestamp
 typedef base.EntityID EntityID
 typedef base.Entity Entity
 
-const Version HEAD = 1
+const Version HEAD = 2
 
 /**
  * Контекст для принятия решений, по сути аннотированный набором атрибутов.
