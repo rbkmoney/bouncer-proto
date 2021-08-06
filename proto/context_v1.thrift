@@ -9,7 +9,6 @@ include "base.thrift"
 
 typedef base.Version Version
 typedef base.Timestamp Timestamp
-typedef base.EntityID EntityID
 typedef base.Entity Entity
 
 const Version HEAD = 2
@@ -388,16 +387,18 @@ struct AnalyticsAPIOperation {
 }
 
 /**
- * Контекст получаемый из токенов платежных инструментов.
- * Токен платежных инструментов создается в createPaymentResource.
+ * Атрибуты платежного стредства.
+ * Токены платежных интрументов создается в createPaymentResource.
  * Этот контекст используется и для провайдерских токенов.
- * Для валидации используется AuthScope.
+ * Привязка токена может сопоставляться с Auth конекстом или CommonAPIOperation.
  */
 struct ContextPaymentTool {
-    1: optional Timestamp expiration
-    2: optional EntityID party
-    3: optional EntityID shop
-    4: optional EntityID invoice
-    5: optional EntityID invoice_template
-    6: optional EntityID customer
+    /**
+     * Привязка токена платежного средства
+     */
+    1: optional AuthScope scope
+    /*
+     * Время жизни токена платежного средства
+     */
+    2: optional Timestamp expiration
 }
