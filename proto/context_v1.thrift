@@ -391,8 +391,7 @@ struct AnalyticsAPIOperation {
  * Контекст получаемый из токенов платежных инструментов.
  * Токен платежных инструментов создается в createPaymentResource.
  * Этот контекст используется и для провайдерских токенов.
- * Данные для провайдерского токена упакованы в merchantID.
- * Для валидации используется AuthScope
+ * Для валидации используется AuthScope.
  */
 struct ContextPaymentTool {
     1: optional Timestamp expiration
