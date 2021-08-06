@@ -388,9 +388,9 @@ struct AnalyticsAPIOperation {
 
 /**
  * Атрибуты платежного стредства.
- * Токены платежных интрументов создается в createPaymentResource.
+ * Токены платежных интрументов создаются в createPaymentResource.
  * Этот контекст используется и для провайдерских токенов.
- * Привязка токена может сопоставляться с Auth конекстом или CommonAPIOperation.
+ * Привязка может быть сопоставлена с Auth конекстом или CommonAPIOperation.
  */
 struct ContextPaymentTool {
     /**
