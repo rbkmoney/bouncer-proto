@@ -147,7 +147,7 @@ struct Requester {
 /**
  * Контекст, получаемый из сервисов, реализующих один из интерфейсов протокола
  * https://github.com/rbkmoney/damsel/tree/master/proto/payment_processing.thrift
- * (например invoicing в hellgate)
+ * (например данные о платёжных сущностях invoicing в hellgate)
  * и содержащий _проверенную_ информацию
  */
 struct ContextPaymentProcessing {
@@ -277,7 +277,7 @@ struct ClientInfo {
     /*
      * ip адрес плательщика передаваемый в createPaymentResource
      */
-    1: optional string replacement_ip
+    1: optional string ip
 }
 
 /**
