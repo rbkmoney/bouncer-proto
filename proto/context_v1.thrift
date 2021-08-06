@@ -5,16 +5,15 @@
 namespace java com.rbkmoney.bouncer.context.v1
 namespace erlang bctx_v1
 
-typedef i32 Version
-const Version HEAD = 1
+include "base.thrift"
+include "context.thrift"
 
-/**
- * Отметка во времени согласно RFC 3339.
- *
- * Строка должна содержать дату и время в UTC в следующем формате:
- * `2020-03-22T06:12:27Z`.
- */
-typedef string Timestamp
+typedef base.Version Version
+typedef base.Timestamp Timestamp
+typedef base.EntityID EntityID
+typedef base.Entity Entity
+
+const Version HEAD = 1
 
 /**
  * Контекст для принятия решений, по сути аннотированный набором атрибутов.
@@ -267,7 +266,7 @@ struct CommonAPIOperation {
     13: optional Entity webhook
     14: optional Entity claim
     15: optional Entity payout
-    15: optional ClientInfo client_info
+    16: optional ClientInfo client_info
 }
 
 /*
@@ -404,16 +403,3 @@ struct ContextPaymentTool {
     5: optional EntityID invoice_template
     6: optional EntityID customer
 }
-
-/**
- * Нечто уникально идентифицируемое.
- *
- * Рекомендуется использовать для обеспечения прямой совместимости, в случае
- * например, когда в будущем мы захотим расширить набор атрибутов какой-либо
- * сущности, добавив в неё что-то кроме идентификатора.
- */
-struct Entity {
-    1: optional EntityID id
-}
-
-typedef string EntityID
