@@ -40,8 +40,16 @@ struct ContextFragment {
    13: optional ContextWebhooks webhooks
    14: optional ContextReports reports
    15: optional ContextClaimManagement claimmgmt
-   16: optional ContextClientInfo client_info
    17: optional ContextPaymentTool payment_tool
+
+   //
+   16: optional LegacyContextTokens tokens
+}
+
+// Подлежит удалению
+struct LegacyContextTokens {
+    // Переехал в ClientInfo
+    1: optional string replacement_ip
 }
 
 /**
@@ -227,13 +235,16 @@ struct Payout {
 }
 
 /**
- * Атрибуты Common API.
- * Данные, присланные _клиентом_ в явном виде как часть запроса
+ * Контекст Common API.
  */
 struct ContextCommonAPI {
     1: optional CommonAPIOperation op
 }
 
+/**
+ * Арибуты операции Common API.
+ * Данные, присланные _клиентом_ в явном виде как часть запроса
+ */
 struct CommonAPIOperation {
     /**
      * Например:
@@ -256,6 +267,18 @@ struct CommonAPIOperation {
     13: optional Entity webhook
     14: optional Entity claim
     15: optional Entity payout
+    15: optional ClientInfo client_info
+}
+
+/*
+ * Дополнительная информация о клиенте и его устройствах
+ * передаваемпя в некоторых запросах в явном виде.
+ */
+struct ClientInfo {
+    /*
+     * ip адрес плательщика передаваемый в createPaymentResource
+     */
+    1: optional string replacement_ip
 }
 
 /**
@@ -366,22 +389,12 @@ struct AnalyticsAPIOperation {
     5: optional Entity file
 }
 
-/*
- * Контекст дополнительной информации о клиенте и его устройствах
- * передаваемой в некоторых запросах.
- */
-struct ContextClientInfo {
-    /*
-     * ip адрес плательщика передаваемый в createPaymentResource
-     */
-    1: optional string replacement_ip
-}
-
 /**
  * Контекст получаемый из токенов платежных инструментов.
  * Токен платежных инструментов создается в createPaymentResource.
  * Этот контекст используется и для провайдерских токенов.
  * Данные для провайдерского токена упакованы в merchantID.
+ * Для валидации используется AuthScope
  */
 struct ContextPaymentTool {
     1: optional Timestamp expiration
@@ -391,7 +404,6 @@ struct ContextPaymentTool {
     5: optional EntityID invoice_template
     6: optional EntityID customer
 }
-
 
 /**
  * Нечто уникально идентифицируемое.
