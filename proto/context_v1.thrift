@@ -39,12 +39,12 @@ struct ContextFragment {
    15: optional ContextClaimManagement claimmgmt
    17: optional ContextPaymentTool payment_tool
 
-   //
-   16: optional LegacyContextTokens tokens
+   // legacy
+   16: optional ContextTokens tokens
 }
 
 // Подлежит удалению
-struct LegacyContextTokens {
+struct ContextTokens {
     // Переехал в ClientInfo
     1: optional string replacement_ip
 }
