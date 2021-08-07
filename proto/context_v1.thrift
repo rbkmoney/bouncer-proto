@@ -397,7 +397,7 @@ struct ContextPaymentTool {
      * Привязка токена платежного средства
      */
     1: optional AuthScope scope
-    /*
+    /**
      * Время жизни токена платежного средства
      */
     2: optional Timestamp expiration
