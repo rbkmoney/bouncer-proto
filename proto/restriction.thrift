@@ -1,7 +1,11 @@
 namespace java com.rbkmoney.bouncer.rstn
 namespace erlang brstn
 
-typedef i32 Version
+include "base.thrift"
+
+typedef base.Version Version
+typedef base.Entity Entity
+
 const Version HEAD = 1
 
 /**
@@ -13,6 +17,7 @@ const Version HEAD = 1
 struct Restrictions {
     1: required Version vsn = HEAD
     2: optional RestrictionsAnalyticsAPI anapi
+    3: optional RestrictionsCommonAPI capi
 }
 
 /**
@@ -27,12 +32,8 @@ struct AnalyticsAPIOperationRestrictions {
 }
 
 /**
- * Нечто уникально идентифицируемое.
- *
- * Рекомендуется использовать для обеспечения прямой совместимости, в случае
- * например, когда в будущем мы захотим расширить набор атрибутов какой-либо
- * сущности, добавив в неё что-то кроме идентификатора.
+ * Ограничения, накладываемые на сервисы общего АПИ
  */
-struct Entity {
-    1: optional string id
+struct RestrictionsCommonAPI {
+    1: optional bool ip_replacement_forbidden
 }
