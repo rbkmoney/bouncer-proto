@@ -10,6 +10,8 @@ include "base.thrift"
 typedef base.Version Version
 typedef base.Timestamp Timestamp
 typedef base.Entity Entity
+typedef base.EntityID EntityID
+typedef base.Cash Cash
 
 const Version HEAD = 2
 
@@ -33,8 +35,6 @@ struct ContextFragment {
    11: optional ContextAnalyticsAPI anapi
    18: optional ContextWalletAPI wapi
 
-   11: optional ContextAnalyticsAPI anapi
-
    10: optional ContextPaymentProcessing payment_processing
    12: optional ContextPayouts payouts
    13: optional ContextWebhooks webhooks
@@ -45,7 +45,8 @@ struct ContextFragment {
    /**
    * Наборы атрибутов для контекста сервиса кошельков, см. описание ниже.
    */
-   15: optional set<Entity> wallet
+   19: optional set<Entity> wallet
+
    // legacy
    16: optional ContextTokens tokens
 }

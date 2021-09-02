@@ -23,4 +23,28 @@ typedef string EntityID
  */
 struct Entity {
     1: optional EntityID id
+    2: optional string type
+    3: optional EntityID party
+
+    4: optional WalletAttrs wallet
+}
+
+struct Cash {
+    1: optional string amount
+    2: optional string currency
+}
+
+struct WalletAttrs {
+    1: optional EntityID identity
+    2: optional EntityID wallet
+    3: optional Cash body
+    4: optional WalletReportAttrs report
+}
+
+struct WalletReportAttrs {
+    /**
+    * TODO: Кажется не очень правильно ссылаться на список объектов,
+    * достаточно, чтобы каждый из этих объектов ссылался на объект, которому он принадлежит
+    */
+    1: optional set<EntityID> files
 }
